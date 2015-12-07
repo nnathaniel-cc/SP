@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>BLACKPYRAMID</Machine>
+    <WindowsUser>Nick</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>01799930-f7c8-4b83-9fee-3785cbadd8d7</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\Nick\Desktop\SP\SP\obj\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>D76DD4732B28FB5E8D25798B24C5701131CEDE465F7E4DA6F3DD8C0B9CEDEE96</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>01799930-f7c8-4b83-9fee-3785cbadd8d7_1.0.0.0_neutral__chny7cy2kxrnj</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>01799930-f7c8-4b83-9fee-3785cbadd8d7_chny7cy2kxrnj!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>01799930-f7c8-4b83-9fee-3785cbadd8d7</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Nick</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-12-06T23:57:11.335</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.exe">
+      <PackagePath>SP.exe</PackagePath>
+      <Modified>2015-12-07T00:00:02.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-23T11:01:02.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-23T11:01:02.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-23T11:01:02.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-07-23T11:01:02.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2015-12-06T23:57:11.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2015-12-07T00:00:02.637</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.xr.xml">
+      <PackagePath>SP.xr.xml</PackagePath>
+      <Modified>2015-12-07T00:00:02.625</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2015-12-06T23:57:11.225</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
