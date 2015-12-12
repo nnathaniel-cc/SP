@@ -20,7 +20,7 @@
       	<Button.Background>
       		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
       			<GradientStop Color="Black" Offset="0"/>
-      			<GradientStop Color="#FF7E0000" Offset="1"/>
+      			<GradientStop Color="#FF7A0000" Offset="1"/>
       		</LinearGradientBrush>
       	</Button.Background>
       </Button>
@@ -28,10 +28,12 @@
       	<Button.Background>
       		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
       			<GradientStop Color="Black" Offset="0"/>
-      			<GradientStop Color="#FF7E0000" Offset="1"/>
+      			<GradientStop Color="#FF7A0000" Offset="1"/>
       		</LinearGradientBrush>
       	</Button.Background>
       </Button>
+      <Image Margin="102,282,965,261" Source="Assets/puzzle1.png" Stretch="Fill"/>
+      <Image Margin="1030,282,116,261" Source="Assets/puzzle2.png" Stretch="Fill"/>
     </Grid>
 </Page>
 

@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>BLACKPYRAMID</Machine>
-    <WindowsUser>Nick</WindowsUser>
+    <Machine>BRODIE-PC</Machine>
+    <WindowsUser>Brodie</WindowsUser>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
     <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
     <PackageArchitecture>neutral</PackageArchitecture>
     <PackageIdentityName>01799930-f7c8-4b83-9fee-3785cbadd8d7</PackageIdentityName>
-    <IntermediateOutputPath>C:\Users\Nick\Desktop\SP\SP\obj\Debug\</IntermediateOutputPath>
-    <RegisteredManifestChecksum>D76DD4732B28FB5E8D25798B24C5701131CEDE465F7E4DA6F3DD8C0B9CEDEE96</RegisteredManifestChecksum>
+    <IntermediateOutputPath>C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>29567D76D5B2359695D6AB9F57DAECE1A1CD1808E2EC458E131C9DE7E39C9797</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>01799930-f7c8-4b83-9fee-3785cbadd8d7_1.0.0.0_neutral__chny7cy2kxrnj</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>01799930-f7c8-4b83-9fee-3785cbadd8d7_chny7cy2kxrnj!App</RegisteredUserModeAppID>
     <RegisteredPackageID>01799930-f7c8-4b83-9fee-3785cbadd8d7</RegisteredPackageID>
@@ -17,52 +19,68 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-12-06T23:57:11.335</Modified>
+      <Modified>2015-12-11T23:28:07.347</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.exe">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\SP.exe">
       <PackagePath>SP.exe</PackagePath>
-      <Modified>2015-12-07T00:00:02.780</Modified>
+      <Modified>2015-12-12T07:51:03.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-07-23T11:01:02.000</Modified>
+      <Modified>2015-12-09T19:39:08.642</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\SmallLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\Assets\puzzle1.png">
+      <PackagePath>Assets\puzzle1.png</PackagePath>
+      <Modified>2015-12-09T19:39:08.644</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\Assets\puzzle2.png">
+      <PackagePath>Assets\puzzle2.png</PackagePath>
+      <Modified>2015-12-09T19:39:08.644</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\Assets\SmallLogo.scale-100.png">
       <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-07-23T11:01:02.000</Modified>
+      <Modified>2015-12-09T19:39:08.643</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-07-23T11:01:02.000</Modified>
+      <Modified>2015-12-09T19:39:08.643</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\Assets\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\Assets\StoreLogo.scale-100.png">
       <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-07-23T11:01:02.000</Modified>
+      <Modified>2015-12-09T19:39:08.643</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\App.xbf">
-      <PackagePath>App.xbf</PackagePath>
-      <Modified>2015-12-06T23:57:11.000</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\MainPage.xbf">
-      <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2015-12-07T00:00:02.637</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.xr.xml">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\SP.xr.xml">
       <PackagePath>SP.xr.xml</PackagePath>
-      <Modified>2015-12-07T00:00:02.625</Modified>
+      <Modified>2015-12-12T03:57:25.531</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Nick\Desktop\SP\SP\bin\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2015-12-09T19:47:51.872</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\LoadImage.xbf">
+      <PackagePath>LoadImage.xbf</PackagePath>
+      <Modified>2015-12-11T18:46:32.508</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2015-12-09T19:47:51.872</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\PuzzlePage.xbf">
+      <PackagePath>PuzzlePage.xbf</PackagePath>
+      <Modified>2015-12-12T03:57:25.573</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2015-12-06T23:57:11.225</Modified>
+      <Modified>2015-12-11T23:28:07.269</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

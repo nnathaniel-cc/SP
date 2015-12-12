@@ -118,6 +118,7 @@
     <Compile Include="PuzzlePage.xaml.cs">
       <DependentUpon>PuzzlePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

@@ -55,7 +55,7 @@
                 <Image x:Name="image15" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="150" Grid.Column="2" Grid.Row="3"/>
                 <Image x:Name="image16" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="150" Grid.Column="3" Grid.Row="3"/>
             </Grid>
-            <Button x:Name="uploadImage" Content="Upload Image" HorizontalAlignment="Left" Margin="961,301,0,0" VerticalAlignment="Top" Height="52" Width="211" Click="uploadImage_Click">
+            <Button x:ConnectionId='1' x:Name="uploadImage" Content="Upload Image" HorizontalAlignment="Left" Margin="961,301,0,0" VerticalAlignment="Top" Height="52" Width="211"                          >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -75,3 +75,4 @@
 
     </Grid>
 </Page>
+
