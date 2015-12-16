@@ -72,6 +72,7 @@
         </Button.Background>
       </Button>
     </Grid>
+    <TextBlock x:Name="wintext" HorizontalAlignment="Left" TextWrapping="Wrap" Text="YOU WIN!!!" VerticalAlignment="Top" Margin="675,304,0,0" Height="188" Width="270" FontSize="48" Visibility="Collapsed"/>
 
   </Grid>
 </Page>

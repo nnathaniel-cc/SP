@@ -24,7 +24,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using System.Threading;
 using Windows.Media.Capture;
-
+using SP.Shared;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SP
@@ -34,16 +34,21 @@ namespace SP
     /// </summary>
     public sealed partial class PuzzlePage : Page
     {
+        private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
         static bool mouseDown = false;
         List<Tile> Tiles = new List<Tile>();
+        private bool isGameOver = false;
         String ImagePath;
         Point down = new Point();
         Point up = new Point();
-
+        private Point[] imgPosi = new Point[16];
         public PuzzlePage()
         {
             this.InitializeComponent();
-
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
             //image pointer pressed events
             this.image1.PointerPressed += Image1_PointerPressed;
             this.image2.PointerPressed += Image2_PointerPressed;
@@ -79,17 +84,106 @@ namespace SP
             this.image14.PointerExited += Image14_PointerExited;
             this.image15.PointerExited += Image15_PointerExited;
             this.image16.PointerExited += Image16_PointerExited;
-
             //image pointer exited events
         }
 
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
 
+        /// <summary>
+        /// NavigationHelper is used on each page to aid in navigation and 
+        /// process lifetime management
+        /// </summary>
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+
+        }
+
+        /// <summary>
+        /// Populates the page with content passed during navigation. Any saved state is also
+        /// provided when recreating a page from a prior session.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event; typically <see cref="NavigationHelper"/>
+        /// </param>
+        /// <param name="e">Event data that provides both the navigation parameter passed to
+        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
+        /// a dictionary of state preserved by this page during an earlier
+        /// session. The state will be null the first time a page is visited.</param>
+        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Preserves state associated with this page in case the application is suspended or the
+        /// page is discarded from the navigation cache.  Values must conform to the serialization
+        /// requirements of <see cref="SuspensionManager.SessionState"/>.
+        /// </summary>
+        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
+        /// <param name="e">Event data that provides an empty dictionary to be populated with
+        /// serializable state.</param>
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+        }
+
+        #region NavigationHelper registration
+
+        /// The methods provided in this section are simply used to allow
+        /// NavigationHelper to respond to the page's navigation methods.
+        /// 
+        /// Page specific logic should be placed in event handlers for the  
+        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
+        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
+        /// The navigation parameter is available in the LoadState method 
+        /// in addition to page state preserved during an earlier session.
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
 
+        public void checkWin()
+        {
+            // Check each image name containing position number
+            if (image1.Name == "0")
+                if (image2.Name == "1")
+                    if (image3.Name == "2")
+                        if (image4.Name == "3")
+                            if (image5.Name == "4")
+                                if (image6.Name == "5")
+                                    if (image7.Name == "6")
+                                        if (image8.Name == "7")
+                                            if (image9.Name == "8")
+                                                if (image10.Name == "9")
+                                                    if (image11.Name == "10")
+                                                        if (image12.Name == "11")
+                                                            if (image13.Name == "12")
+                                                                if (image14.Name == "13")
+                                                                    if (image15.Name == "14")
+                                                                        isGameOver = true;
+            // WIN STUFF 
+            if (isGameOver)
+            {
+                wintext.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+
+        }
 
         private List<E> ShuffleList<E>(List<E> inputList)
         {
@@ -99,7 +193,7 @@ namespace SP
             int randomIndex = 0;
             while (inputList.Count > 0)
             {
-                randomIndex = r.Next(0, inputList.Count); //Choose a random object in the list
+                randomIndex = r.Next(0, 2); //Choose a random object in the list
                 randomList.Add(inputList[randomIndex]); //add it to the new, random list
                 inputList.RemoveAt(randomIndex); //remove to avoid duplicates
             }
@@ -109,7 +203,9 @@ namespace SP
 
         async private void uploadImage_Click(object sender, RoutedEventArgs e)
         {
-
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
             ImagePath = string.Empty;
             FileOpenPicker filePicker = new FileOpenPicker();
             filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
@@ -124,7 +220,7 @@ namespace SP
 
             // Let user choose one file
             StorageFile file = await filePicker.PickSingleFileAsync();
-
+            Tiles.Clear();
             // Check to make sure user picked a file
             if (file != null)
             {
@@ -174,36 +270,49 @@ namespace SP
                         Tile ti = new Tile();
                         ti.image = bitmapImage;
                         ti.position = counter;
-
                         Tiles.Add(ti);
                         counter++;
-
+                       
                     }
 
                 }
 
                 Tiles = ShuffleList<Tile>(Tiles);
-
+                // transfer image and position number 
                 image1.Source = Tiles[0].image;
+                image1.Name = Tiles[0].position.ToString();
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
                 image4.Source = Tiles[3].image;
+                image4.Name = Tiles[3].position.ToString();
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
                 image13.Source = Tiles[12].image;
+                image13.Name = Tiles[12].position.ToString();
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
                 Tiles[15].image = new BitmapImage();
                 Tiles[15].blank = true;
                 
             }
-            Tiles.Clear();
         }
 
 
@@ -217,6 +326,7 @@ namespace SP
         }
         private void Image2_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+
             PointerPoint ptrPt = e.GetCurrentPoint(image2);
             down = ptrPt.Position;
             mouseDown = true;
@@ -312,6 +422,7 @@ namespace SP
         //done
         private void Image1_PointerExited(object sender, PointerRoutedEventArgs e)
         {
+
             PointerPoint ptrPt = e.GetCurrentPoint(image1);
             up = ptrPt.Position;
             Tile temp = new Tile();
@@ -322,10 +433,11 @@ namespace SP
                 temp = Tiles[1];
                 Tiles[1] = Tiles[0];
                 Tiles[0] = temp;
-
+                // transfer image and position 1-16
                 image1.Source = Tiles[0].image;
+                image1.Name = Tiles[0].position.ToString();
                 image2.Source = Tiles[1].image;
-
+                image2.Name = Tiles[1].position.ToString();
             }
             //Down Movement
             else if (up.Y > down.Y && Tiles[4].blank == true && mouseDown == true)
@@ -335,9 +447,11 @@ namespace SP
                 Tiles[0] = temp;
 
                 image1.Source = Tiles[0].image;
+                image1.Name = Tiles[0].position.ToString();
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -356,7 +470,9 @@ namespace SP
                 Tiles[1] = temp;
 
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
 
             }
 
@@ -368,7 +484,9 @@ namespace SP
                 Tiles[1] = temp;
 
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
                 image1.Source = Tiles[0].image;
+                image1.Name = Tiles[0].position.ToString();
             }
 
             //Down Move
@@ -379,9 +497,11 @@ namespace SP
                 Tiles[1] = temp;
 
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -400,7 +520,9 @@ namespace SP
                 Tiles[2] = temp;
 
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
 
             }
 
@@ -412,7 +534,9 @@ namespace SP
                 Tiles[2] = temp;
 
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
                 image4.Source = Tiles[3].image;
+                image4.Name = Tiles[3].position.ToString();
 
             }
 
@@ -424,9 +548,11 @@ namespace SP
                 Tiles[2] = temp;
 
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -445,7 +571,9 @@ namespace SP
                 Tiles[3] = temp;
 
                 image4.Source = Tiles[3].image;
+                image4.Name = Tiles[3].position.ToString();
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
 
             }
 
@@ -457,9 +585,11 @@ namespace SP
                 Tiles[3] = temp;
 
                 image4.Source = Tiles[3].image;
+                image4.Name = Tiles[3].position.ToString();
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -478,7 +608,9 @@ namespace SP
                 Tiles[4] = temp;
 
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
 
             }
 
@@ -491,7 +623,9 @@ namespace SP
                 Tiles[4] = temp;
 
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
                 image1.Source = Tiles[0].image;
+                image1.Name = Tiles[0].position.ToString();
             }
 
             //Down Move
@@ -502,9 +636,11 @@ namespace SP
                 Tiles[4] = temp;
 
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -523,7 +659,9 @@ namespace SP
                 Tiles[5] = temp;
 
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
 
             }
 
@@ -535,7 +673,9 @@ namespace SP
                 Tiles[5] = temp;
 
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
 
             }
 
@@ -547,7 +687,9 @@ namespace SP
                 Tiles[5] = temp;
 
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
             }
 
             //Down Move
@@ -558,9 +700,11 @@ namespace SP
                 Tiles[5] = temp;
 
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -579,7 +723,9 @@ namespace SP
                 Tiles[6] = temp;
 
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
 
             }
 
@@ -591,7 +737,9 @@ namespace SP
                 Tiles[6] = temp;
 
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
 
             }
 
@@ -603,7 +751,9 @@ namespace SP
                 Tiles[6] = temp;
 
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
             }
 
             //Down Move
@@ -614,9 +764,11 @@ namespace SP
                 Tiles[6] = temp;
 
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -636,7 +788,9 @@ namespace SP
                 Tiles[7] = temp;
 
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
 
             }
 
@@ -648,7 +802,9 @@ namespace SP
                 Tiles[7] = temp;
 
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
                 image4.Source = Tiles[3].image;
+                image4.Name = Tiles[3].position.ToString();
             }
 
             //Down Move
@@ -659,9 +815,11 @@ namespace SP
                 Tiles[7] = temp;
 
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -681,7 +839,9 @@ namespace SP
                 Tiles[8] = temp;
 
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
 
             }
 
@@ -693,7 +853,9 @@ namespace SP
                 Tiles[8] = temp;
 
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
             }
 
             //Down Move
@@ -704,9 +866,11 @@ namespace SP
                 Tiles[8] = temp;
 
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
                 image13.Source = Tiles[12].image;
+                image13.Name = Tiles[12].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -725,8 +889,9 @@ namespace SP
                 Tiles[9] = temp;
 
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
                 image9.Source = Tiles[8].image;
-
+                image9.Name = Tiles[8].position.ToString();
             }
 
             //right Move
@@ -737,7 +902,9 @@ namespace SP
                 Tiles[9] = temp;
 
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
 
             }
 
@@ -749,7 +916,9 @@ namespace SP
                 Tiles[9] = temp;
 
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
             }
 
             //Down Move
@@ -760,9 +929,11 @@ namespace SP
                 Tiles[9] = temp;
 
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -781,7 +952,9 @@ namespace SP
                 Tiles[10] = temp;
 
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
 
             }
 
@@ -793,7 +966,9 @@ namespace SP
                 Tiles[10] = temp;
 
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
 
             }
 
@@ -805,7 +980,9 @@ namespace SP
                 Tiles[10] = temp;
 
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
             }
 
             //Down Move
@@ -816,9 +993,11 @@ namespace SP
                 Tiles[10] = temp;
 
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -837,7 +1016,9 @@ namespace SP
                 Tiles[11] = temp;
 
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
 
             }
 
@@ -849,7 +1030,9 @@ namespace SP
                 Tiles[11] = temp;
 
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
             }
 
             //Down Move
@@ -860,9 +1043,11 @@ namespace SP
                 Tiles[11] = temp;
 
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
                 image16.Source = Tiles[15].image;
+                image16.Name = Tiles[15].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -881,7 +1066,9 @@ namespace SP
                 Tiles[12] = temp;
 
                 image13.Source = Tiles[12].image;
+                image13.Name = Tiles[12].position.ToString();
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
 
             }
 
@@ -894,7 +1081,9 @@ namespace SP
                 Tiles[12] = temp;
 
                 image13.Source = Tiles[12].image;
+                image13.Name = Tiles[12].position.ToString();
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
             }
 
             mouseDown = false;
@@ -915,7 +1104,9 @@ namespace SP
                 Tiles[13] = temp;
 
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
 
             }
 
@@ -927,7 +1118,9 @@ namespace SP
                 Tiles[13] = temp;
 
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
                 image13.Source = Tiles[12].image;
+                image13.Name = Tiles[12].position.ToString();
             }
 
             //Up Move
@@ -938,9 +1131,11 @@ namespace SP
                 Tiles[13] = temp;
 
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -959,7 +1154,9 @@ namespace SP
                 Tiles[14] = temp;
 
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
                 image16.Source = Tiles[15].image;
+                image16.Name = Tiles[15].position.ToString();
 
             }
 
@@ -971,7 +1168,9 @@ namespace SP
                 Tiles[14] = temp;
 
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
             }
 
             //Up Move
@@ -982,9 +1181,11 @@ namespace SP
                 Tiles[14] = temp;
 
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -1004,7 +1205,9 @@ namespace SP
                 Tiles[15] = temp;
 
                 image16.Source = Tiles[15].image;
+                image16.Name = Tiles[15].position.ToString();
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
             }
 
             //Up Move
@@ -1015,14 +1218,19 @@ namespace SP
                 Tiles[15] = temp;
 
                 image16.Source = Tiles[15].image;
+                image16.Name = Tiles[15].position.ToString();
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
         async private void captureImage_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
             // TODO: Add event handler implementation here.
             CameraCaptureUI cameraUI = new CameraCaptureUI();
 
@@ -1049,7 +1257,7 @@ namespace SP
 
                     int width = bitmapCamera.PixelWidth;
                     int height = bitmapCamera.PixelHeight;
-
+                    Tiles.Clear();
                     WriteableBitmap wBitmap = new WriteableBitmap(width, height);
                     using (var stream = await capturedMedia.OpenAsync(FileAccessMode.Read))
                     {
@@ -1086,6 +1294,7 @@ namespace SP
                             }
                             BitmapImage bitmapImg = new BitmapImage();
                             bitmapImg.SetSource(accessStream);
+                          
                             Tile cam = new Tile();
                             cam.image = bitmapImg;
                             cam.position = counter;
@@ -1097,30 +1306,45 @@ namespace SP
                 }
 
                 Tiles = ShuffleList<Tile>(Tiles);
-
+                // transfer image and position number 
                 image1.Source = Tiles[0].image;
+                image1.Name = Tiles[0].position.ToString();
                 image2.Source = Tiles[1].image;
+                image2.Name = Tiles[1].position.ToString();
                 image3.Source = Tiles[2].image;
+                image3.Name = Tiles[2].position.ToString();
                 image4.Source = Tiles[3].image;
+                image4.Name = Tiles[3].position.ToString();
                 image5.Source = Tiles[4].image;
+                image5.Name = Tiles[4].position.ToString();
                 image6.Source = Tiles[5].image;
+                image6.Name = Tiles[5].position.ToString();
                 image7.Source = Tiles[6].image;
+                image7.Name = Tiles[6].position.ToString();
                 image8.Source = Tiles[7].image;
+                image8.Name = Tiles[7].position.ToString();
                 image9.Source = Tiles[8].image;
+                image9.Name = Tiles[8].position.ToString();
                 image10.Source = Tiles[9].image;
+                image10.Name = Tiles[9].position.ToString();
                 image11.Source = Tiles[10].image;
+                image11.Name = Tiles[10].position.ToString();
                 image12.Source = Tiles[11].image;
+                image12.Name = Tiles[11].position.ToString();
                 image13.Source = Tiles[12].image;
+                image13.Name = Tiles[12].position.ToString();
                 image14.Source = Tiles[13].image;
+                image14.Name = Tiles[13].position.ToString();
                 image15.Source = Tiles[14].image;
+                image15.Name = Tiles[14].position.ToString();
                 Tiles[15].image = new BitmapImage();
+
                 Tiles[15].blank = true;
             }
             else
             {
                 this.Frame.Navigate(typeof(MainPage));
             }
-            Tiles.Clear();
         }
     }
 

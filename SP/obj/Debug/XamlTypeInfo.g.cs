@@ -124,17 +124,27 @@ namespace SP.SP_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[4];
+            _typeNameTable = new string[9];
             _typeNameTable[0] = "SP.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[3] = "SP.PuzzlePage";
+            _typeNameTable[4] = "SP.Shared.ObservableDictionary";
+            _typeNameTable[5] = "Object";
+            _typeNameTable[6] = "String";
+            _typeNameTable[7] = "SP.Shared.NavigationHelper";
+            _typeNameTable[8] = "Windows.UI.Xaml.DependencyObject";
 
-            _typeTable = new global::System.Type[4];
+            _typeTable = new global::System.Type[9];
             _typeTable[0] = typeof(global::SP.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[3] = typeof(global::SP.PuzzlePage);
+            _typeTable[4] = typeof(global::SP.Shared.ObservableDictionary);
+            _typeTable[5] = typeof(global::System.Object);
+            _typeTable[6] = typeof(global::System.String);
+            _typeTable[7] = typeof(global::SP.Shared.NavigationHelper);
+            _typeTable[8] = typeof(global::Windows.UI.Xaml.DependencyObject);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -171,6 +181,14 @@ namespace SP.SP_XamlTypeInfo
 
         private object Activate_0_MainPage() { return new global::SP.MainPage(); }
         private object Activate_3_PuzzlePage() { return new global::SP.PuzzlePage(); }
+        private object Activate_4_ObservableDictionary() { return new global::SP.Shared.ObservableDictionary(); }
+        private void MapAdd_4_ObservableDictionary(object instance, object key, object item)
+        {
+            var collection = (global::System.Collections.Generic.IDictionary<global::System.String, global::System.Object>)instance;
+            var newKey = (global::System.String)key;
+            var newItem = (global::System.Object)item;
+            collection.Add(newKey, newItem);
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -200,19 +218,74 @@ namespace SP.SP_XamlTypeInfo
             case 3:   //  SP.PuzzlePage
                 userType = new global::SP.SP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_3_PuzzlePage;
+                userType.AddMemberName("DefaultViewModel");
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
+                break;
+
+            case 4:   //  SP.Shared.ObservableDictionary
+                userType = new global::SP.SP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.DictionaryAdd = MapAdd_4_ObservableDictionary;
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 5:   //  Object
+                xamlType = new global::SP.SP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 6:   //  String
+                xamlType = new global::SP.SP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 7:   //  SP.Shared.NavigationHelper
+                userType = new global::SP.SP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 8:   //  Windows.UI.Xaml.DependencyObject
+                xamlType = new global::SP.SP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
             return xamlType;
         }
 
 
+        private object get_0_PuzzlePage_DefaultViewModel(object instance)
+        {
+            var that = (global::SP.PuzzlePage)instance;
+            return that.DefaultViewModel;
+        }
+        private object get_1_PuzzlePage_NavigationHelper(object instance)
+        {
+            var that = (global::SP.PuzzlePage)instance;
+            return that.NavigationHelper;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::SP.SP_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::SP.SP_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "SP.PuzzlePage.DefaultViewModel":
+                userType = (global::SP.SP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SP.PuzzlePage");
+                xamlMember = new global::SP.SP_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "SP.Shared.ObservableDictionary");
+                xamlMember.Getter = get_0_PuzzlePage_DefaultViewModel;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "SP.PuzzlePage.NavigationHelper":
+                userType = (global::SP.SP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SP.PuzzlePage");
+                xamlMember = new global::SP.SP_XamlTypeInfo.XamlMember(this, "NavigationHelper", "SP.Shared.NavigationHelper");
+                xamlMember.Getter = get_1_PuzzlePage_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            }
             return xamlMember;
         }
     }
@@ -537,6 +610,7 @@ namespace SP.SP_XamlTypeInfo
         }
     }
 }
+
 
 
 

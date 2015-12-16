@@ -103,6 +103,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -115,6 +116,10 @@
     <Compile Include="PuzzlePage.xaml.cs">
       <DependentUpon>PuzzlePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shared\NavigationHelper.cs" />
+    <Compile Include="Shared\ObservableDictionary.cs" />
+    <Compile Include="Shared\RelayCommand.cs" />
+    <Compile Include="Shared\SuspensionManager.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
