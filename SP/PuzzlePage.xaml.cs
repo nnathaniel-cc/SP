@@ -20,7 +20,10 @@ using Windows.Storage;
 using Windows.UI.Xaml.Shapes;
 using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
-
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using System.Threading;
+using Windows.Media.Capture;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -80,7 +83,7 @@ namespace SP
             //image pointer exited events
         }
 
-        
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -198,8 +201,9 @@ namespace SP
                 image15.Source = Tiles[14].image;
                 Tiles[15].image = new BitmapImage();
                 Tiles[15].blank = true;
-
+                
             }
+            Tiles.Clear();
         }
 
 
@@ -667,7 +671,7 @@ namespace SP
             PointerPoint ptrPt = e.GetCurrentPoint(image9);
             up = ptrPt.Position;
             Tile temp = new Tile();
-            
+
 
             //right Move
             if (up.X > down.X && Tiles[9].blank == true && mouseDown == true)
@@ -990,7 +994,7 @@ namespace SP
             PointerPoint ptrPt = e.GetCurrentPoint(image16);
             up = ptrPt.Position;
             Tile temp = new Tile();
-  
+
 
             //Left Move
             if (up.X < down.X && Tiles[14].blank == true && mouseDown == true)
@@ -1017,7 +1021,107 @@ namespace SP
             mouseDown = false;
         }
 
-        /////////////////////////
+        async private void captureImage_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            // TODO: Add event handler implementation here.
+            CameraCaptureUI cameraUI = new CameraCaptureUI();
+
+            cameraUI.PhotoSettings.AllowCropping = false;
+            cameraUI.PhotoSettings.MaxResolution = CameraCaptureUIMaxPhotoResolution.MediumXga;
+            //async call to use the camera
+            Windows.Storage.StorageFile capturedMedia =
+                await cameraUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+            List<StorageFile> strList = new List<StorageFile>();
+
+            if (capturedMedia != null)
+            {
+                uint counter = 0;
+                using (var streamCamera = await capturedMedia.OpenAsync(FileAccessMode.Read))
+                {
+
+                    BitmapImage bitmapCamera = new BitmapImage();
+                    bitmapCamera.SetSource(streamCamera);
+                    // To display the image in a XAML image object
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(streamCamera);
+
+                    // Convert the camera bitap to a WriteableBitmap object, 
+                    // which is often a more useful format.
+
+                    int width = bitmapCamera.PixelWidth;
+                    int height = bitmapCamera.PixelHeight;
+
+                    WriteableBitmap wBitmap = new WriteableBitmap(width, height);
+                    using (var stream = await capturedMedia.OpenAsync(FileAccessMode.Read))
+                    {
+
+
+                    }
+                    for (uint y = 0; y <= 3; y++)
+                    {
+
+                        for (uint x = 0; x <= 3; x++)
+                        {
+                            InMemoryRandomAccessStream accessStream = new InMemoryRandomAccessStream();
+                            BitmapEncoder encode = await BitmapEncoder.CreateForTranscodingAsync(accessStream, decoder);
+
+                            // convert the entire bitmap to a 600px by 600px bitmap
+                            encode.BitmapTransform.ScaledHeight = 600;
+                            encode.BitmapTransform.ScaledWidth = 600;
+
+                            BitmapBounds bounds = new BitmapBounds();
+                            bounds.Height = 150;
+                            bounds.Width = 150;
+                            bounds.X = 150 * x;
+                            bounds.Y = 150 * y;
+                            encode.BitmapTransform.Bounds = bounds;
+
+                            // write out to the stream
+                            try
+                            {
+                                await encode.FlushAsync();
+                            }
+                            catch (Exception ex)
+                            {
+                                string s = ex.ToString();
+                            }
+                            BitmapImage bitmapImg = new BitmapImage();
+                            bitmapImg.SetSource(accessStream);
+                            Tile cam = new Tile();
+                            cam.image = bitmapImg;
+                            cam.position = counter;
+                            Tiles.Add(cam);
+                            counter++;
+                        }
+                    }
+
+                }
+
+                Tiles = ShuffleList<Tile>(Tiles);
+
+                image1.Source = Tiles[0].image;
+                image2.Source = Tiles[1].image;
+                image3.Source = Tiles[2].image;
+                image4.Source = Tiles[3].image;
+                image5.Source = Tiles[4].image;
+                image6.Source = Tiles[5].image;
+                image7.Source = Tiles[6].image;
+                image8.Source = Tiles[7].image;
+                image9.Source = Tiles[8].image;
+                image10.Source = Tiles[9].image;
+                image11.Source = Tiles[10].image;
+                image12.Source = Tiles[11].image;
+                image13.Source = Tiles[12].image;
+                image14.Source = Tiles[13].image;
+                image15.Source = Tiles[14].image;
+                Tiles[15].image = new BitmapImage();
+                Tiles[15].blank = true;
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(MainPage));
+            }
+            Tiles.Clear();
+        }
     }
 
 }

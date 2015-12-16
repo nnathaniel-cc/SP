@@ -72,3 +72,8 @@ C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\qualifiers.txt
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\ProjectArchitectures.txt
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\PuzzlePage.xbf
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.g.i.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.g.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.xaml
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.xbf

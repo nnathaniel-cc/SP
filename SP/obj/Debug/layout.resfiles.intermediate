@@ -1,11 +1,14 @@
+Assets\BadgeLogo.scale-100.png
+Assets\BadgeLogo.scale-180.png
 Assets\Logo.scale-100.png
 Assets\puzzle1.png
 Assets\puzzle2.png
 Assets\SmallLogo.scale-100.png
 Assets\SplashScreen.scale-100.png
+Assets\Square150x150Logo.scale-100.png
 Assets\StoreLogo.scale-100.png
+Assets\Wide310x150Logo.scale-100.png
 App.xbf
-LoadImage.xbf
 MainPage.xbf
 PuzzlePage.xbf
 SP.xr.xml
