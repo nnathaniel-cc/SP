@@ -612,5 +612,3 @@ namespace SP.SP_XamlTypeInfo
 }
 
 
-
-

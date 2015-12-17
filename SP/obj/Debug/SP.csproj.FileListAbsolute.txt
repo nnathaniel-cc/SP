@@ -31,7 +31,6 @@ C:\Users\Nick\Desktop\SP\SP\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Nick\Desktop\SP\SP\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Nick\Desktop\SP\SP\obj\Debug\ProjectArchitectures.txt
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\App.xbf
-C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\LoadImage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\MainPage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\PuzzlePage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\SP.xr.xml
@@ -42,19 +41,15 @@ C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\AppxManifest.xml
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\SP.build.appxrecipe
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\App.g.i.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\App.g.cs
-C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\LoadImage.g.i.cs
-C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\LoadImage.g.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\MainPage.g.i.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\MainPage.g.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\PuzzlePage.g.i.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\PuzzlePage.g.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\XamlTypeInfo.g.cs
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\App.xaml
-C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\LoadImage.xaml
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\MainPage.xaml
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\PuzzlePage.xaml
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\App.xbf
-C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\LoadImage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\MainPage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\PuzzlePage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\XamlSaveStateFile.xml

@@ -43,12 +43,14 @@ namespace SP
         Point down = new Point();
         Point up = new Point();
         private Point[] imgPosi = new Point[16];
+
         public PuzzlePage()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            
             //image pointer pressed events
             this.image1.PointerPressed += Image1_PointerPressed;
             this.image2.PointerPressed += Image2_PointerPressed;
@@ -161,22 +163,23 @@ namespace SP
         public void checkWin()
         {
             // Check each image name containing position number
-            if (image1.Name == "0")
-                if (image2.Name == "1")
-                    if (image3.Name == "2")
-                        if (image4.Name == "3")
-                            if (image5.Name == "4")
-                                if (image6.Name == "5")
-                                    if (image7.Name == "6")
-                                        if (image8.Name == "7")
-                                            if (image9.Name == "8")
-                                                if (image10.Name == "9")
-                                                    if (image11.Name == "10")
-                                                        if (image12.Name == "11")
-                                                            if (image13.Name == "12")
-                                                                if (image14.Name == "13")
-                                                                    if (image15.Name == "14")
-                                                                        isGameOver = true;
+            if (Tiles[0].position == 0)
+                if (Tiles[1].position == 1)
+                    if (Tiles[2].position == 2)
+                        if (Tiles[3].position == 3)
+                            if (Tiles[4].position == 4)
+                                if (Tiles[5].position == 5)
+                                    if (Tiles[6].position == 6)
+                                        if (Tiles[7].position == 7)
+                                            if (Tiles[8].position == 8)
+                                                if (Tiles[9].position == 9)
+                                                    if (Tiles[10].position == 10)
+                                                        if (Tiles[11].position == 11)
+                                                            if (Tiles[12].position == 12)
+                                                                if (Tiles[13].position == 13)
+                                                                    if (Tiles[14].position == 14)
+                                                                        if (Tiles[15].position == 15)
+                                                                            isGameOver = true;
             // WIN STUFF 
             if (isGameOver)
             {
@@ -193,7 +196,7 @@ namespace SP
             int randomIndex = 0;
             while (inputList.Count > 0)
             {
-                randomIndex = r.Next(0, 2); //Choose a random object in the list
+                randomIndex = r.Next(0, inputList.Count); //Choose a random object in the list
                 randomList.Add(inputList[randomIndex]); //add it to the new, random list
                 inputList.RemoveAt(randomIndex); //remove to avoid duplicates
             }
@@ -221,6 +224,7 @@ namespace SP
             // Let user choose one file
             StorageFile file = await filePicker.PickSingleFileAsync();
             Tiles.Clear();
+
             // Check to make sure user picked a file
             if (file != null)
             {
@@ -270,6 +274,7 @@ namespace SP
                         Tile ti = new Tile();
                         ti.image = bitmapImage;
                         ti.position = counter;
+
                         Tiles.Add(ti);
                         counter++;
                        
@@ -277,41 +282,28 @@ namespace SP
 
                 }
 
-                Tiles = ShuffleList<Tile>(Tiles);
-                // transfer image and position number 
-                image1.Source = Tiles[0].image;
-                image1.Name = Tiles[0].position.ToString();
-                image2.Source = Tiles[1].image;
-                image2.Name = Tiles[1].position.ToString();
-                image3.Source = Tiles[2].image;
-                image3.Name = Tiles[2].position.ToString();
-                image4.Source = Tiles[3].image;
-                image4.Name = Tiles[3].position.ToString();
-                image5.Source = Tiles[4].image;
-                image5.Name = Tiles[4].position.ToString();
-                image6.Source = Tiles[5].image;
-                image6.Name = Tiles[5].position.ToString();
-                image7.Source = Tiles[6].image;
-                image7.Name = Tiles[6].position.ToString();
-                image8.Source = Tiles[7].image;
-                image8.Name = Tiles[7].position.ToString();
-                image9.Source = Tiles[8].image;
-                image9.Name = Tiles[8].position.ToString();
-                image10.Source = Tiles[9].image;
-                image10.Name = Tiles[9].position.ToString();
-                image11.Source = Tiles[10].image;
-                image11.Name = Tiles[10].position.ToString();
-                image12.Source = Tiles[11].image;
-                image12.Name = Tiles[11].position.ToString();
-                image13.Source = Tiles[12].image;
-                image13.Name = Tiles[12].position.ToString();
-                image14.Source = Tiles[13].image;
-                image14.Name = Tiles[13].position.ToString();
-                image15.Source = Tiles[14].image;
-                image15.Name = Tiles[14].position.ToString();
                 Tiles[15].image = new BitmapImage();
                 Tiles[15].blank = true;
-                
+                Tiles = ShuffleList<Tile>(Tiles);
+
+                image1.Source = Tiles[0].image;
+                image2.Source = Tiles[1].image;
+                image3.Source = Tiles[2].image;
+                image4.Source = Tiles[3].image;
+                image5.Source = Tiles[4].image;
+                image6.Source = Tiles[5].image;
+                image7.Source = Tiles[6].image;
+                image8.Source = Tiles[7].image;
+                image9.Source = Tiles[8].image;
+                image10.Source = Tiles[9].image;
+                image11.Source = Tiles[10].image;
+                image12.Source = Tiles[11].image;
+                image13.Source = Tiles[12].image;
+                image14.Source = Tiles[13].image;
+                image15.Source = Tiles[14].image;
+                image16.Source = Tiles[15].image;
+            
+
             }
         }
 
@@ -1085,7 +1077,7 @@ namespace SP
                 image9.Source = Tiles[8].image;
                 image9.Name = Tiles[8].position.ToString();
             }
-
+            checkWin();
             mouseDown = false;
         }
 
@@ -1305,41 +1297,26 @@ namespace SP
 
                 }
 
-                Tiles = ShuffleList<Tile>(Tiles);
-                // transfer image and position number 
-                image1.Source = Tiles[0].image;
-                image1.Name = Tiles[0].position.ToString();
-                image2.Source = Tiles[1].image;
-                image2.Name = Tiles[1].position.ToString();
-                image3.Source = Tiles[2].image;
-                image3.Name = Tiles[2].position.ToString();
-                image4.Source = Tiles[3].image;
-                image4.Name = Tiles[3].position.ToString();
-                image5.Source = Tiles[4].image;
-                image5.Name = Tiles[4].position.ToString();
-                image6.Source = Tiles[5].image;
-                image6.Name = Tiles[5].position.ToString();
-                image7.Source = Tiles[6].image;
-                image7.Name = Tiles[6].position.ToString();
-                image8.Source = Tiles[7].image;
-                image8.Name = Tiles[7].position.ToString();
-                image9.Source = Tiles[8].image;
-                image9.Name = Tiles[8].position.ToString();
-                image10.Source = Tiles[9].image;
-                image10.Name = Tiles[9].position.ToString();
-                image11.Source = Tiles[10].image;
-                image11.Name = Tiles[10].position.ToString();
-                image12.Source = Tiles[11].image;
-                image12.Name = Tiles[11].position.ToString();
-                image13.Source = Tiles[12].image;
-                image13.Name = Tiles[12].position.ToString();
-                image14.Source = Tiles[13].image;
-                image14.Name = Tiles[13].position.ToString();
-                image15.Source = Tiles[14].image;
-                image15.Name = Tiles[14].position.ToString();
                 Tiles[15].image = new BitmapImage();
-
                 Tiles[15].blank = true;
+                Tiles = ShuffleList<Tile>(Tiles);
+
+                image1.Source = Tiles[0].image;
+                image2.Source = Tiles[1].image;
+                image3.Source = Tiles[2].image;
+                image4.Source = Tiles[3].image;
+                image5.Source = Tiles[4].image;
+                image6.Source = Tiles[5].image;
+                image7.Source = Tiles[6].image;
+                image8.Source = Tiles[7].image;
+                image9.Source = Tiles[8].image;
+                image10.Source = Tiles[9].image;
+                image11.Source = Tiles[10].image;
+                image12.Source = Tiles[11].image;
+                image13.Source = Tiles[12].image;
+                image14.Source = Tiles[13].image;
+                image15.Source = Tiles[14].image;
+                image16.Source = Tiles[15].image;
             }
             else
             {
