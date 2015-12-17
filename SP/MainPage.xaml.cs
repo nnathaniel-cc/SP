@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*
+ * FILE : MainPage.xaml.cs
+ * PROJECT : Option 1 - Puzzle Game
+ * PROGRAMMER : Brodie Paterson, Nicholas Nathaniel
+ * FIRST VERSION : 2015-12-17
+ * DESCRIPTION : This program will generate a picture puzzle
+ *              that the player will have to solve. The user 
+ *              uploads an image through the device camera or a local file 
+ *              which gets randomized into tiles as it is loaded.
+ *              The user will attempt to solve the puzzle by 
+ *              sliding the picture tiles to the correct order. Once a winning 
+ *              combination is found, the user is alerted and prompted to play again or quit.
+ * 
+ * 
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
