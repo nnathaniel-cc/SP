@@ -71,8 +71,25 @@
           </LinearGradientBrush>
         </Button.Background>
       </Button>
+      <Image x:Name="previewImage" HorizontalAlignment="Left" Height="600" Margin="722,116,0,0" VerticalAlignment="Top" Width="600"/>
+      <TextBox x:Name="wintext" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="440,252,0,0" Height="222" Width="465" TextAlignment="Center" FontFamily="Arial Black" Text="&#xD;&#xA;YOU WIN !!" FontSize="32" Visibility="Collapsed"/>
     </Grid>
-    <TextBlock x:Name="wintext" HorizontalAlignment="Left" TextWrapping="Wrap" Text="YOU WIN!!!" VerticalAlignment="Top" Margin="675,304,0,0" Height="188" Width="270" FontSize="48" Visibility="Collapsed"/>
+    <Button x:Name="playAgain" Content="Play Again" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,411,0,0" Width="211" Height="52" Click="playAgain_Click" Visibility="Collapsed">
+    	<Button.Background>
+    		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    			<GradientStop Color="Black" Offset="0"/>
+    			<GradientStop Color="Black" Offset="1"/>
+    		</LinearGradientBrush>
+    	</Button.Background>
+    </Button>
+    <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="211" Height="52" Margin="691,411,0,0" Click="quitButton_Click" Visibility="Collapsed">
+    	<Button.Background>
+    		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    			<GradientStop Color="Black" Offset="0"/>
+    			<GradientStop Color="Black" Offset="1"/>
+    		</LinearGradientBrush>
+    	</Button.Background>
+    </Button>
 
   </Grid>
 </Page>

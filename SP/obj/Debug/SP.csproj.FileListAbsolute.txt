@@ -1,35 +1,3 @@
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\App.xbf
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\MainPage.xbf
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.xr.xml
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.exe
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.pdb
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\resources.pri
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\AppxManifest.xml
-C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.build.appxrecipe
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.g.i.cs
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.g.cs
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.g.i.cs
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.g.cs
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\XamlTypeInfo.g.cs
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.xaml
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.xaml
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.xbf
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.xbf
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\XamlSaveStateFile.xml
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\SP.exe
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\SP.pdb
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\priconfig.xml
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\priconfig.xml.intermediate
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\layout.resfiles
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\layout.resfiles.intermediate
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\resources.resfiles
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\resources.resfiles.intermediate
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\pri.resfiles
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\pri.resfiles.intermediate
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\qualifiers.txt
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\qualifiers.txt.intermediate
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\Nick\Desktop\SP\SP\obj\Debug\ProjectArchitectures.txt
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\App.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\LoadImage.xbf
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\bin\Debug\MainPage.xbf
@@ -72,8 +40,40 @@ C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\qualifiers.txt
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Brodie\Desktop\VS Assignments\SP\SP\obj\Debug\ProjectArchitectures.txt
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\App.xbf
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\MainPage.xbf
 C:\Users\Nick\Desktop\SP\SP\bin\Debug\PuzzlePage.xbf
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.xr.xml
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.exe
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.pdb
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\resources.pri
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\AppxManifest.xml
+C:\Users\Nick\Desktop\SP\SP\bin\Debug\SP.build.appxrecipe
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.g.i.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.g.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.g.i.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.g.cs
 C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.g.i.cs
 C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.g.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.xaml
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.xaml
 C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.xaml
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\App.xbf
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\MainPage.xbf
 C:\Users\Nick\Desktop\SP\SP\obj\Debug\PuzzlePage.xbf
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\SP.exe
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\SP.pdb
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\priconfig.xml
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\priconfig.xml.intermediate
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\layout.resfiles
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\layout.resfiles.intermediate
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\resources.resfiles
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\resources.resfiles.intermediate
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\pri.resfiles
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\pri.resfiles.intermediate
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\qualifiers.txt
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Nick\Desktop\SP\SP\obj\Debug\ProjectArchitectures.txt

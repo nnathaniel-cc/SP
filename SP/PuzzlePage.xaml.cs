@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+ * FILE : PuzzlePage.xaml.cs
+ * PROJECT : Option 1 - Puzzle Game
+ * PROGRAMMER : Brodie Paterson, Nicholas Nathaniel
+ * FIRST VERSION : 2015-12-17
+ * DESCRIPTION : This program will generate a picture puzzle
+ *              that the player will have to solve. The user 
+ *              uploads an image through the device camera or a local file 
+ *              which gets randomized into tiles as it is loaded.
+ *              The user will attempt to solve the puzzle by 
+ *              sliding the picture tiles to the correct order. Once a winning 
+ *              combination is found, the user is alerted and prompted to play again or quit.
+ * 
+ * 
+ * 
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,7 +40,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using System.Threading;
+using System.Threading.Tasks;
 using Windows.Media.Capture;
 using SP.Shared;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -43,6 +61,7 @@ namespace SP
         Point down = new Point();
         Point up = new Point();
         private Point[] imgPosi = new Point[16];
+
         public PuzzlePage()
         {
             this.InitializeComponent();
@@ -50,41 +69,41 @@ namespace SP
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
             //image pointer pressed events
-            this.image1.PointerPressed += Image1_PointerPressed;
-            this.image2.PointerPressed += Image2_PointerPressed;
-            this.image3.PointerPressed += Image3_PointerPressed;
-            this.image4.PointerPressed += Image4_PointerPressed;
-            this.image5.PointerPressed += Image5_PointerPressed;
-            this.image6.PointerPressed += Image6_PointerPressed;
-            this.image7.PointerPressed += Image7_PointerPressed;
-            this.image8.PointerPressed += Image8_PointerPressed;
-            this.image9.PointerPressed += Image9_PointerPressed;
-            this.image10.PointerPressed += Image10_PointerPressed;
-            this.image11.PointerPressed += Image11_PointerPressed;
-            this.image12.PointerPressed += Image12_PointerPressed;
-            this.image13.PointerPressed += Image13_PointerPressed;
-            this.image14.PointerPressed += Image14_PointerPressed;
-            this.image15.PointerPressed += Image15_PointerPressed;
-            this.image16.PointerPressed += Image16_PointerPressed;
+                this.image1.PointerPressed += Image1_PointerPressed;
+                this.image2.PointerPressed += Image2_PointerPressed;
+                this.image3.PointerPressed += Image3_PointerPressed;
+                this.image4.PointerPressed += Image4_PointerPressed;
+                this.image5.PointerPressed += Image5_PointerPressed;
+                this.image6.PointerPressed += Image6_PointerPressed;
+                this.image7.PointerPressed += Image7_PointerPressed;
+                this.image8.PointerPressed += Image8_PointerPressed;
+                this.image9.PointerPressed += Image9_PointerPressed;
+                this.image10.PointerPressed += Image10_PointerPressed;
+                this.image11.PointerPressed += Image11_PointerPressed;
+                this.image12.PointerPressed += Image12_PointerPressed;
+                this.image13.PointerPressed += Image13_PointerPressed;
+                this.image14.PointerPressed += Image14_PointerPressed;
+                this.image15.PointerPressed += Image15_PointerPressed;
+                this.image16.PointerPressed += Image16_PointerPressed;
 
-            //image pointer released events
-            this.image1.PointerExited += Image1_PointerExited;
-            this.image2.PointerExited += Image2_PointerExited;
-            this.image3.PointerExited += Image3_PointerExited;
-            this.image4.PointerExited += Image4_PointerExited;
-            this.image5.PointerExited += Image5_PointerExited;
-            this.image6.PointerExited += Image6_PointerExited;
-            this.image7.PointerExited += Image7_PointerExited;
-            this.image8.PointerExited += Image8_PointerExited;
-            this.image9.PointerExited += Image9_PointerExited;
-            this.image10.PointerExited += Image10_PointerExited;
-            this.image11.PointerExited += Image11_PointerExited;
-            this.image12.PointerExited += Image12_PointerExited;
-            this.image13.PointerExited += Image13_PointerExited;
-            this.image14.PointerExited += Image14_PointerExited;
-            this.image15.PointerExited += Image15_PointerExited;
-            this.image16.PointerExited += Image16_PointerExited;
-            //image pointer exited events
+                //image pointer released events
+                this.image1.PointerExited += Image1_PointerExited;
+                this.image2.PointerExited += Image2_PointerExited;
+                this.image3.PointerExited += Image3_PointerExited;
+                this.image4.PointerExited += Image4_PointerExited;
+                this.image5.PointerExited += Image5_PointerExited;
+                this.image6.PointerExited += Image6_PointerExited;
+                this.image7.PointerExited += Image7_PointerExited;
+                this.image8.PointerExited += Image8_PointerExited;
+                this.image9.PointerExited += Image9_PointerExited;
+                this.image10.PointerExited += Image10_PointerExited;
+                this.image11.PointerExited += Image11_PointerExited;
+                this.image12.PointerExited += Image12_PointerExited;
+                this.image13.PointerExited += Image13_PointerExited;
+                this.image14.PointerExited += Image14_PointerExited;
+                this.image15.PointerExited += Image15_PointerExited;
+                this.image16.PointerExited += Image16_PointerExited;
+                //image pointer exited events
         }
 
         public ObservableDictionary DefaultViewModel
@@ -158,6 +177,9 @@ namespace SP
 
         }
 
+        /// <summary>
+        /// checkWin() is a function that checks each image position to ensure its in the winning format
+        /// </summary>
         public void checkWin()
         {
             // Check each image name containing position number
@@ -176,15 +198,20 @@ namespace SP
                                                             if (image13.Name == "12")
                                                                 if (image14.Name == "13")
                                                                     if (image15.Name == "14")
+                                                                        // Tiles in correct order
                                                                         isGameOver = true;
             // WIN STUFF 
             if (isGameOver)
-            {
+            {		
                 wintext.Visibility = Windows.UI.Xaml.Visibility.Visible;
+				playAgain.Visibility = Windows.UI.Xaml.Visibility.Visible;
+				quitButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
 
         }
-
+        /// <summary>
+        /// ShuffleList randomizes image tiles uploaded by the player
+        /// </summary>
         private List<E> ShuffleList<E>(List<E> inputList)
         {
             List<E> randomList = new List<E>();
@@ -193,24 +220,34 @@ namespace SP
             int randomIndex = 0;
             while (inputList.Count > 0)
             {
-                randomIndex = r.Next(0, 2); //Choose a random object in the list
+                randomIndex = r.Next(0, 0); //Choose a random object in the list
                 randomList.Add(inputList[randomIndex]); //add it to the new, random list
                 inputList.RemoveAt(randomIndex); //remove to avoid duplicates
             }
 
             return randomList; //return the new random list
         }
+        /// <summary>
+        /// LoadImage loads image from stream for players preview image
+        /// </summary>
+        private static async Task<BitmapImage> LoadImage(StorageFile file)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            FileRandomAccessStream stream = (FileRandomAccessStream)await file.OpenAsync(FileAccessMode.Read);
+            bitmapImage.SetSource(stream);
 
+            return bitmapImage;
+
+        }
+        /// <summary>
+        /// uploadImage_Click() allows the user to upload a local image file.
+        /// </summary>
         async private void uploadImage_Click(object sender, RoutedEventArgs e)
         {
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
             ImagePath = string.Empty;
             FileOpenPicker filePicker = new FileOpenPicker();
             filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             filePicker.ViewMode = PickerViewMode.Thumbnail;
-
             // Filter to include a sample subset of file types
             filePicker.FileTypeFilter.Clear();
             filePicker.FileTypeFilter.Add(".bmp");
@@ -220,17 +257,20 @@ namespace SP
 
             // Let user choose one file
             StorageFile file = await filePicker.PickSingleFileAsync();
+            
             Tiles.Clear();
             // Check to make sure user picked a file
             if (file != null)
             {
                 uint counter = 0;
-
+                // Setup preview image for player
+                BitmapImage img = new BitmapImage();
+                img = await LoadImage(file);
+                previewImage.Source = img;
                 // Open a stream for the selected file and bitmap decoder
                 Windows.Storage.Streams.IRandomAccessStream fileStream =
                     await file.OpenAsync(FileAccessMode.Read);
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
-
                 // loop through grid locations to split the picture 16 times
                 for (uint y = 0; y <= 3; y++)
                 {
@@ -266,7 +306,6 @@ namespace SP
                         // Set the image source to the selected bitmap.
                         BitmapImage bitmapImage = new BitmapImage();
                         bitmapImage.SetSource(accessStream);
-
                         Tile ti = new Tile();
                         ti.image = bitmapImage;
                         ti.position = counter;
@@ -317,108 +356,160 @@ namespace SP
 
 
         /////////////////////////////////// Pointer Pressed method events for each image 1-16///////////////////////////////////////////////
-
+        /// <summary>
+        /// Image1_PointerPressed to Image16_PointerPressed tracks the clicked image tile.
+        /// </summary>
         private void Image1_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            PointerPoint ptrPt = e.GetCurrentPoint(image1);
-            down = ptrPt.Position;
-            mouseDown = true;
+            // If game over no tiles can be moved
+            if (isGameOver == false)
+            {
+                PointerPoint ptrPt = e.GetCurrentPoint(image1);
+                down = ptrPt.Position;
+                mouseDown = true;
+            }
         }
         private void Image2_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image2);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image3_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image3);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image4_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image4);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image5_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image5);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image6_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image6);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image7_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image7);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image8_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image8);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image9_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image9);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image10_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image10);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image11_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image11);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image12_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image12);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image13_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image13);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image14_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image14);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image15_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image15);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
         private void Image16_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            if (isGameOver == false)
+            {
             PointerPoint ptrPt = e.GetCurrentPoint(image16);
             down = ptrPt.Position;
             mouseDown = true;
+            }
         }
 
 
         ////////////////////// Pointer Released for all images 1-16//////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Image1_PointerExited to Image16_PointerExited allows the moving image tiles to work properly.
+        /// </summary>
         //done
         private void Image1_PointerExited(object sender, PointerRoutedEventArgs e)
         {
@@ -1225,12 +1316,11 @@ namespace SP
             checkWin();
             mouseDown = false;
         }
-
+        /// <summary>
+        /// captureImage_Click allows the user to upload a captured image file from the device camera.
+        /// </summary>
         async private void captureImage_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
             // TODO: Add event handler implementation here.
             CameraCaptureUI cameraUI = new CameraCaptureUI();
 
@@ -1244,6 +1334,12 @@ namespace SP
             if (capturedMedia != null)
             {
                 uint counter = 0;
+                BitmapImage img = new BitmapImage();
+                // display preview image
+                img = await LoadImage(capturedMedia);
+                previewImage.Source = img;
+                // resize for wide screen camera photo
+                previewImage.Stretch = Stretch.Fill;
                 using (var streamCamera = await capturedMedia.OpenAsync(FileAccessMode.Read))
                 {
 
@@ -1258,6 +1354,7 @@ namespace SP
                     int width = bitmapCamera.PixelWidth;
                     int height = bitmapCamera.PixelHeight;
                     Tiles.Clear();
+                    // create bitmap size of camera photo
                     WriteableBitmap wBitmap = new WriteableBitmap(width, height);
                     using (var stream = await capturedMedia.OpenAsync(FileAccessMode.Read))
                     {
@@ -1294,7 +1391,7 @@ namespace SP
                             }
                             BitmapImage bitmapImg = new BitmapImage();
                             bitmapImg.SetSource(accessStream);
-                          
+                            // set each tile to image cut
                             Tile cam = new Tile();
                             cam.image = bitmapImg;
                             cam.position = counter;
@@ -1304,9 +1401,9 @@ namespace SP
                     }
 
                 }
-
+                // randomize tiles
                 Tiles = ShuffleList<Tile>(Tiles);
-                // transfer image and position number 
+                // transfer image and position number containing correct order
                 image1.Source = Tiles[0].image;
                 image1.Name = Tiles[0].position.ToString();
                 image2.Source = Tiles[1].image;
@@ -1341,10 +1438,21 @@ namespace SP
 
                 Tiles[15].blank = true;
             }
-            else
-            {
-                this.Frame.Navigate(typeof(MainPage));
-            }
+        }
+        /// <summary>
+        /// playAgain_Click restarts game if winner clicks
+        /// </summary>
+        private void playAgain_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            InitializeComponent();
+        	this.Frame.Navigate(typeof(PuzzlePage));
+        }
+        /// <summary>
+        /// quitButton_Click quits application if winner clicks
+        /// </summary>
+        private void quitButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+        	Application.Current.Exit();
         }
     }
 
